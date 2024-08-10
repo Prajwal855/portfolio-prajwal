@@ -1,26 +1,43 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import styled from 'styled-components';
+import Hero from './components/Hero';
+import AboutMe from './components/AboutMe';
+import Education from './components/Education';
+import Skills from './components/Skills';
+import Experience from './components/Experience';
+import Projects from './components/Projects';
+import ContactMe from './components/ContactMe';
+import Footer from './components/Footer';
+import AudioProvider from './components/AudioContext';
 
-function App() {
+const ScrollContainer = styled.div`
+  height: auto;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+`;
+
+const Content = styled.div`
+  height: 600vh;
+`;
+
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AudioProvider>
+      <ScrollContainer>
+        <Content>
+          <Hero />
+          <AboutMe />
+          <Education />
+          <Skills />
+          <Experience />
+          <Projects />
+          <ContactMe />
+        </Content>
+      </ScrollContainer>
+      <Footer />
+    </AudioProvider>
   );
-}
+};
 
 export default App;
