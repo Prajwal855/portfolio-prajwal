@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
-import { useAudio } from './AudioContext'; 
+import { useAudio } from './AudioContext';
 
 const FooterContainer = styled.footer`
-  width: calc(100% - 60px);
+  width: calc(100% - 40px);
+  max-height: 50px;
   padding: 20px;
   margin: 0 20px 40px 20px;
   background-color: rgba(255, 255, 255, 0.2); /* Whitish blur effect */
@@ -25,38 +26,35 @@ const SelectContainer = styled.div`
 
   select {
     margin-left: 10px;
-    padding: 5px;
-    background: none; /* Remove background */
-    color: #fff; /* Text color */
-    border: none; /* Remove border */
-    outline: none; /* Remove outline */
-    cursor: pointer; /* Pointer cursor */
+    padding: 10px 15px;
+    background: none; 
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
   }
 
   select option {
-    background-color: rgba(200, 200, 200, 0.3); /* Grayish blur background for options */
-    color: #000; /* Text color for options */
-  }
-
-  select option:hover {
-    background-color: rgba(173, 216, 230, 0.5); /* Light bluish background on hover */
-    color: #000; /* Text color on hover */
+    background-color: #333;
+    color: #fff;
+    border: none;
   }
 `;
 
 const AudioToggle = styled.button`
-  background: none; /* Remove background */
-  color: #fff; /* Text color */
-  border: none; /* Remove border */
+  background: none; 
+  color: #fff;
+  border: none;
   padding: 10px;
   cursor: pointer;
   font-size: 16px;
   outline: none;
   display: flex;
   align-items: center;
+  transition: color 0.3s ease;
 
   &:hover {
-    color: #ddd; /* Change text color on hover */
+    color: #ddd; 
   }
 `;
 
@@ -71,7 +69,7 @@ const Footer: React.FC = () => {
   return (
     <FooterContainer>
       <SelectContainer>
-        <select id="language-select" onChange={changeLanguage}>
+        <select id="language-select" onChange={changeLanguage} value={i18n.language}>
           <option value="en">English</option>
           <option value="fr">Français</option>
         </select>

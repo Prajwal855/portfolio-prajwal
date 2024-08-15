@@ -1,141 +1,159 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
-import Background from './Background';
-import { useTranslation } from 'react-i18next';
 
-// Keyframes for animations
-const bounceIn = keyframes`
-  from {
-    transform: scale(0.8);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-`;
-
-const fadeIn = keyframes`
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-`;
-
+// Typing effect
 const typing = keyframes`
-  from {
-    width: 0;
-    opacity: 0;
-  }
-  to {
-    width: 100%;
-    opacity: 1;
-  }
+  from { width: 0; }
+  to { width: 100%; }
 `;
 
-const blinkCursor = keyframes`
-  from, to {
-    border-color: transparent;
+// Blinking cursor
+const blink = keyframes`
+  from, to { border-color: transparent; }
+  50% { border-color: white; }
+`;
+
+// Hide the cursor after typing ends
+const hideCursor = keyframes`
+  from { border-right-color: white; }
+  to { border-right-color: transparent; }
+`;
+
+// Gradient color change animation
+const gradient = keyframes`
+  0% {
+    background-position: 0% 50%;
   }
   50% {
-    border-color: #fff;
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 `;
-
-
-const colorChange = keyframes`
-  0% { color: #fff; }
-  25% { color: #ff6347; } /* Example color */
-  50% { color: #00bfff; } /* Example color */
-  75% { color: #32cd32; } /* Example color */
-  100% { color: #fff; }
-`;
-
 
 const HeroSection = styled.section`
-  position: relative;
   height: 100vh;
   display: flex;
-  justify-content: center;
   align-items: center;
-  color: white;
-  text-align: center;
-  overflow: hidden;
-`;
+  justify-content: space-between;
+  padding: 0 5%;
+  background: url('/path-to-background-image.jpg') no-repeat center center;
+  background-size: cover;
 
-const TextContainer = styled.div`
-  position: relative;
-  display: inline-block;
-`;
-
-const Name = styled.div`
-  font-size: 100px;
-  color: #fff;
-  font-family: Poppins, sans-serif;
-  margin: 0;
-  animation:  ${colorChange} 10s linear infinite;
-  z-index: 1;
-`;
-
-const SoftwareEngineer = styled.div`
-  font-size: 50px;
-  color: #fff;
-  font-family: Poppins, sans-serif;
-  margin: 0;
-  opacity: 0;
-  animation: ${fadeIn} 2s ease-out 2s forwards;
-  z-index: 1;
-
-  &:hover {
-    color: #ff6347; /* Example hover color */
+  @media (max-width: 768px) {
+    flex-direction: column;
+    justify-content: center;
   }
 `;
 
-const DescriptionWrapper = styled.div`
-  position: relative;
-  max-width: 600px; /* Adjust as needed */
-  height: 200px; /* Adjust as needed */
-  overflow: hidden;
+const HeroContent = styled.div`
+  max-width: 50%;
+
+  @media (max-width: 768px) {
+    max-width: 80%;
+  }
+
+  @media (max-width: 480px) {
+    max-width: 90%;
+  }
 `;
 
-const DescriptionLine = styled.div<{ delay: number }>`
-  font-size: 21px;
-  color: #fff;
-  font-family: Poppins, sans-serif;
+const GradientText = styled.span`
+  background: linear-gradient(-45deg, #ff6ec4, #7873f5, #4f46e5, #9be15d);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: ${gradient} 10s ease infinite;
+`;
+
+const HeroTitle = styled.h1`
+  font-size: 64px;
+  margin-bottom: 20px;
   white-space: nowrap;
   overflow: hidden;
-  border-right: 4px solid #fff;
-  display: inline-block;
-   animation: ${typing} 2s steps(30, end), ${blinkCursor} 0.75s step-end infinite;
-  opacity: 0;
-  animation-delay: ${props => props.delay}s;
-  animation-fill-mode: forwards;
+  border-right: 3px solid white;
+  animation:
+    ${typing} 4s steps(44, end) 1s forwards, /* Typing animation */
+    ${blink} 0.75s step-end infinite 4s, /* Cursor blink after typing */
+    ${hideCursor} 0.1s forwards 5s; /* Hide cursor after typing ends */
 
-  &:hover {
-    color: #00bfff;
+  @media (max-width: 1024px) {
+    font-size: 48px;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 36px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 28px;
+  }
+`;
+
+const HeroPosition = styled.h2`
+  font-size: 54px;
+  margin-bottom: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+
+  @media (max-width: 1024px) {
+    font-size: 48px;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 36px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 28px;
+  }
+`;
+
+const BitmojiContainer = styled.div`
+  max-width: 40%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  @media (max-width: 768px) {
+    max-width: 60%;
+    margin-top: 20px;
+  }
+
+  @media (max-width: 480px) {
+    max-width: 80%;
+    margin-top: 20px;
   }
 `;
 
 const Hero: React.FC = () => {
-  const { t } = useTranslation();
-
   return (
     <HeroSection>
-      <Background />
-      <TextContainer>
-        <Name>Prajwal M</Name>
-        <SoftwareEngineer>{t('Software Engineer')}</SoftwareEngineer>
-        <DescriptionWrapper>
-          <DescriptionLine delay={4}>
-            {t('Building whatever pops into my head, one line of code at a time.')}
-          </DescriptionLine>
-          <DescriptionLine delay={8}>
-            {t('Coding maverick with a passion for turning wild ideas into reality.')}
-          </DescriptionLine>
-        </DescriptionWrapper>
-      </TextContainer>
+      <HeroContent>
+        <HeroTitle>
+          Hi, My name is <GradientText>Prajwal M</GradientText>
+        </HeroTitle>
+        <HeroPosition>I'm a Software Engineer</HeroPosition>
+        <div style={{display:"flex",flexDirection:"column"}}>
+          <h3 style={{fontSize:"22px"}}>
+            Building whatever pops into my head, one line of code at a time.
+          </h3>
+          <h5 style={{fontSize:"22px"}}>
+            <GradientText>Coding maverick</GradientText> with a passion for turning 
+            <GradientText> wild ideas into reality</GradientText>
+          </h5>
+        </div>
+      </HeroContent>
+      <BitmojiContainer>
+        <img src="https://static.vecteezy.com/system/resources/previews/020/962/986/original/software-engineer-graphic-clipart-design-free-png.png" alt="Bitmoji" />
+      </BitmojiContainer>
     </HeroSection>
   );
 };

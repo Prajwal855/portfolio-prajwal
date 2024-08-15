@@ -1,7 +1,6 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { useTranslation } from 'react-i18next';
-import Background from './Background';
 
 // Animations
 const fadeIn = keyframes`
@@ -15,15 +14,20 @@ const fadeIn = keyframes`
   }
 `;
 
+// Styled Components
 const SkillsSection = styled.section`
   position: relative;
-  height: 100vh;
+  height: auto;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   color: white;
   text-align: center;
+  padding: 20px;
+  background: url('/path-to-background-image.jpg') no-repeat center center;
+  background-size: cover;
 `;
 
 const Title = styled.h1`
@@ -39,6 +43,11 @@ const SkillsGrid = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: 20px;
   width: 80%;
+  max-width: 1200px; /* Adjust max-width as needed */
+  
+  @media (max-width: 768px) {
+    width: 100%; /* Full-width on small screens */
+  }
 `;
 
 const SkillCard = styled.div`
@@ -62,12 +71,28 @@ const SkillIcon = styled.img`
   margin-bottom: 10px;
 `;
 
+const gradientText = keyframes`
+  0% { color: #ff8a00; }
+  50% { color: #e52e71; }
+  100% { color: #ff8a00; }
+`;
+
+const GradientText = styled.span`
+  font-weight: bold;
+  background: linear-gradient(90deg, #ff8a00, #e52e71);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: ${gradientText} 3s ease-in-out infinite;
+`;
+
 const SkillName = styled.p`
   font-size: 18px;
   font-family: 'Roboto', sans-serif;
   color: #fff;
+  margin: 0;
 `;
 
+// Skills Component
 const Skills: React.FC = () => {
   const { t } = useTranslation();
   
@@ -95,13 +120,12 @@ const Skills: React.FC = () => {
 
   return (
     <SkillsSection>
-      <Background />
       <Title>{t('Skills')}</Title>
       <SkillsGrid>
         {skills.map((skill, index) => (
           <SkillCard key={index}>
             <SkillIcon src={skill.icon} alt={`${skill.name} logo`} />
-            <SkillName>{t(skill.name)}</SkillName>
+            <SkillName><GradientText>{t(skill.name)}</GradientText></SkillName>
           </SkillCard>
         ))}
       </SkillsGrid>

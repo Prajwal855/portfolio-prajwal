@@ -7,17 +7,15 @@ const AudioContext = createContext<{ audioOn: boolean; toggleAudio: () => void }
 });
 
 const AudioProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [audioOn, setAudioOn] = useState(false); // Start with audio off
+  const [audioOn, setAudioOn] = useState(false);
   const audioRef = React.useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    // Initialize audio
     if (audioRef.current) {
-      audioRef.current.src = require('../assets/VØJ x Narvent  Memory Reboot (Slowed) .mp3'); // Update path as needed
+      audioRef.current.src = require('../assets/Mr.Kitty - After Dark.mp3');
       audioRef.current.loop = true;
     }
 
-    // Play audio when `audioOn` is true
     if (audioRef.current && audioOn) {
       audioRef.current.play().catch(error => {
         console.log('Playback failed:', error);
