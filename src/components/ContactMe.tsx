@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
-const resume = require('../assets/Prajwal-FullStackResume.pdf');
+const resume = require('../assets/prajwal_resume.pdf');
 
 const GradientText = styled.h1`
   background: linear-gradient(135deg, #ff6ec4, #7873f5, #4f46e5, #9be15d);
