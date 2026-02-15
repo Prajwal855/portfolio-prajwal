@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="PM">
+  <defs>
+    <linearGradient id="pm-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e0c899"/>
+      <stop offset="100%" stop-color="#b79661"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="22" y="22" width="468" height="468" rx="102" fill="#07090f"/>
+  <rect x="22" y="22" width="468" height="468" rx="102" fill="none" stroke="url(#pm-gold)" stroke-width="18"/>
+
+  <text
+    x="256"
+    y="332"
+    text-anchor="middle"
+    font-family="Arial Black, Helvetica, Arial, sans-serif"
+    font-size="260"
+    font-weight="900"
+    letter-spacing="-10"
+    fill="url(#pm-gold)"
+  >PM</text>
+</svg>

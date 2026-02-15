@@ -12,44 +12,42 @@ const AudioProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
   useEffect(() => {
     if (audioRef.current) {
-      audioRef.current.src = require('../assets/Mr.Kitty - After Dark.mp3');
+      audioRef.current.src = require('../assets/portfolio_music.webm');
       audioRef.current.loop = true;
     }
+  }, []);
 
-    if (audioRef.current && audioOn) {
+  useEffect(() => {
+    if (!audioRef.current) {
+      return;
+    }
+    if (audioOn) {
       audioRef.current.play().catch(error => {
         console.log('Playback failed:', error);
       });
+    } else {
+      audioRef.current.pause();
     }
+  }, [audioOn]);
 
-    return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current.currentTime = 0;
+  useEffect(() => {
+    const handleTabHidden = () => {
+      if (document.hidden) {
+        setAudioOn(false);
       }
     };
-  }, [audioOn]);
+
+    document.addEventListener('visibilitychange', handleTabHidden);
+    window.addEventListener('blur', handleTabHidden);
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleTabHidden);
+      window.removeEventListener('blur', handleTabHidden);
+    };
+  }, []);
 
   const toggleAudio = () => {
     setAudioOn(prev => !prev);
-    if (audioRef.current) {
-      if (audioOn) {
-        audioRef.current.pause();
-      } else {
-        audioRef.current.play().catch(error => {
-          console.log('Playback failed:', error);
-        });
-      }
-    }
-  };
-
-  const startAudio = () => {
-    if (audioRef.current && !audioOn) {
-      audioRef.current.play().catch(error => {
-        console.log('Playback failed:', error);
-      });
-      setAudioOn(true);
-    }
   };
 
   return (
